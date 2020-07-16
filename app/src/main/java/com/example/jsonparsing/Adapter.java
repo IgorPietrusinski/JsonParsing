@@ -10,50 +10,57 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
-    LayoutInflater inflater;
-    List<Product> products;
-
-    public Adapter (Context ctx, List<Product> products){
-        this.inflater = LayoutInflater.from(ctx);
-        this.products = products;
-    }
+    private Context mContext;
+    private ArrayList<Product> mProductArrayList;
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-
-        TextView productName, productDescription;
-        ImageView productImage;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            productName = itemView.findViewById(R.id.text_product_name);
-            productDescription = itemView.findViewById(R.id.text_product_description);
-            productImage = itemView.findViewById(R.id.image_product_view);
-        }
+    public Adapter(Context context, ArrayList<Product> productArrayList){
+        this.mContext = context;
+        this.mProductArrayList = productArrayList;
     }
 
     @NonNull
     @Override
-    public Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.custom_list_layout, parent, false);
-        return new ViewHolder(view);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(mContext).inflate(R.layout.custom_list_layout, parent);
+        return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Adapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Product currentProduct = mProductArrayList.get(position);
 
-        holder.productName.setText(products.get(position).getName());
-        holder.productDescription.setText(products.get(position).getDescription());
-        Picasso.get().load(products.get(position).getThumbnailURL()).into(holder.productImage);
+        String imageUrl = currentProduct.getImageURL();
+        String name = currentProduct.getName();
+        String description = currentProduct.getDescription();
+
+        holder.textViewProductName.setText(name);
+        holder.textViewProductDescription.setText(description);
+        Picasso.get().load(imageUrl).fit().centerInside().into(holder.imageViewProductImage);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mProductArrayList.size();
     }
+
+    public class ViewHolder extends RecyclerView.ViewHolder{
+
+        public TextView textViewProductName, textViewProductDescription;
+        ImageView imageViewProductImage;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            textViewProductName = itemView.findViewById(R.id.text_product_name);
+            textViewProductDescription = itemView.findViewById(R.id.text_product_description);
+            imageViewProductImage = itemView.findViewById(R.id.image_product_view);
+        }
+    }
+
 }

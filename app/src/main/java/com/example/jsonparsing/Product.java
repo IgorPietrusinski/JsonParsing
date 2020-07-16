@@ -3,15 +3,13 @@ package com.example.jsonparsing;
 public class Product {
 
     private String imageURL;
-    private String thumbnailURL;
     private String name;
     private String description;
 
     public Product(){}
 
-    public Product(String imageURL, String thumbnailURL, String name, String description) {
+    public Product(String imageURL, String name, String description) {
         this.imageURL = imageURL;
-        this.thumbnailURL = thumbnailURL;
         this.name = name;
         this.description = description;
     }
@@ -24,13 +22,6 @@ public class Product {
         this.imageURL = imageURL;
     }
 
-    public String getThumbnailURL() {
-        return thumbnailURL;
-    }
-
-    public void setThumbnailURL(String thumbnailURL) {
-        this.thumbnailURL = thumbnailURL;
-    }
 
     public String getName() {
         return name;
