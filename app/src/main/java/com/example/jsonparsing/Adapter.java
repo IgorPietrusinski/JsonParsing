@@ -18,6 +18,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     private Context mContext;
     private ArrayList<Product> mProductArrayList;
 
+    //public Adapter(){}
 
     public Adapter(Context context, ArrayList<Product> productArrayList){
         this.mContext = context;
@@ -27,7 +28,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.custom_list_layout, parent);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.product_layout, parent, false);
         return new ViewHolder(v);
     }
 
@@ -41,7 +42,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
         holder.textViewProductName.setText(name);
         holder.textViewProductDescription.setText(description);
-        Picasso.get().load(imageUrl).fit().centerInside().into(holder.imageViewProductImage);
+        Picasso.get().load(imageUrl).into(holder.imageViewProductImage);
     }
 
     @Override
@@ -57,9 +58,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            textViewProductName = itemView.findViewById(R.id.text_product_name);
-            textViewProductDescription = itemView.findViewById(R.id.text_product_description);
-            imageViewProductImage = itemView.findViewById(R.id.image_product_view);
+            imageViewProductImage = itemView.findViewById(R.id.image_view_product);
+            textViewProductName = itemView.findViewById(R.id.text_view_name);
+            textViewProductDescription = itemView.findViewById(R.id.text_view_description);
         }
     }
 

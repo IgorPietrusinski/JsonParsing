@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,6 +25,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
+    //private ListView mRecyclerView;
     private Adapter mAdapter;
     private ArrayList<Product> productArrayList;
     private RequestQueue requestQueue;
@@ -44,32 +48,34 @@ public class MainActivity extends AppCompatActivity {
     private void parseJSON(){
         String url = "https://mac-cosmetics.intevicloud.uk/products/?retail_currency=GBP";
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    JSONArray jsonArray = new JSONArray();
-                    for (int i=0; i<jsonArray.length(); i++){
-                        JSONObject product = jsonArray.getJSONObject(i);
+        JsonArrayRequest arrayRequest = new JsonArrayRequest(Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONArray>() {
+        @Override
+        public void onResponse(JSONArray response) {
+            try {
+                for(int i=0; i<response.length(); i++){
+                    JSONObject object = response.getJSONObject(i);
+                    String productName = object.getString("online_name");
+                    String productDescription = object.getString("online_description");
+                    String imageUrl = object.getString("image_url");
 
-                        String productName = product.getString("online_name");
-                        String productDescription = product.getString("online_description");
-                        String imageUrl = product.getString("image_url");
-
-                        productArrayList.add(new Product(productName, productDescription, imageUrl));
-                    }
-                    mAdapter = new Adapter(MainActivity.this, productArrayList);
-                    mRecyclerView.setAdapter(mAdapter);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    productArrayList.add(new Product(productName, productDescription, imageUrl));
                 }
+
+                mAdapter = new Adapter(MainActivity.this, productArrayList);
+                mRecyclerView.setAdapter(mAdapter);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-        requestQueue.add(request);
+        }
+    }, new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            error.printStackTrace();
+        }
+    });
+        requestQueue.add(arrayRequest);
     }
 }
