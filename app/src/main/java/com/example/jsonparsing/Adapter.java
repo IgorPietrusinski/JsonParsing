@@ -36,9 +36,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product currentProduct = mProductArrayList.get(position);
 
-        String imageUrl = currentProduct.getImageURL();
         String name = currentProduct.getName();
         String description = currentProduct.getDescription();
+        String imageUrl = currentProduct.getImageURL();
 
         holder.textViewProductName.setText(name);
         holder.textViewProductDescription.setText(description);
@@ -52,8 +52,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView textViewProductName, textViewProductDescription;
-        ImageView imageViewProductImage;
+        public TextView textViewProductName;
+        public TextView textViewProductDescription;
+        public ImageView imageViewProductImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
