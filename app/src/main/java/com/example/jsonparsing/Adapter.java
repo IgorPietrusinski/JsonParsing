@@ -20,7 +20,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
     private Context mContext;
     private ArrayList<Product> mProductArrayList;
     private ArrayList<Product> mProductArrayListFull;
+    private OnItemClickListener mClickListener;
 
+
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.mClickListener = listener;
+    }
     //public Adapter(){}
 
     public Adapter(Context context, ArrayList<Product> productArrayList){
@@ -47,6 +56,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
         holder.textViewProductName.setText(name);
         holder.textViewProductDescription.setText(description);
         Picasso.get().load(imageUrl).into(holder.imageViewProductImage);
+
     }
 
     @Override
@@ -66,6 +76,18 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
             imageViewProductImage = itemView.findViewById(R.id.image_view_product);
             textViewProductName = itemView.findViewById(R.id.text_view_name);
             textViewProductDescription = itemView.findViewById(R.id.text_view_description);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mClickListener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            mClickListener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 

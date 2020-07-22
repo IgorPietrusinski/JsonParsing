@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -46,6 +47,13 @@ public class MainActivity extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(this);
         parseJSON();
+
+        mAdapter.setOnItemClickListener(new Adapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                productArrayList.get(position).
+            }
+        });
     }
 
     private void parseJSON(){
@@ -89,7 +97,8 @@ public class MainActivity extends AppCompatActivity {
 
         MenuItem searchProducts = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchProducts.getActionView();
-
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        //searchView.setQueryHint("Search...");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

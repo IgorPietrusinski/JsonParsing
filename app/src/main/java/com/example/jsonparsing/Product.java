@@ -13,6 +13,7 @@ public class Product {
         this.name = name;
         this.description = description;
     }
+
     public String getImageURL() {
         return imageURL;
     }
