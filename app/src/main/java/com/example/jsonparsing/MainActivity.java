@@ -42,18 +42,12 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.productList);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter(mAdapter);
 
         productArrayList = new ArrayList<>();
 
         requestQueue = Volley.newRequestQueue(this);
         parseJSON();
-
-        mAdapter.setOnItemClickListener(new Adapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                productArrayList.get(position).
-            }
-        });
     }
 
     private void parseJSON(){

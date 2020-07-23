@@ -8,6 +8,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
@@ -20,7 +22,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
     private Context mContext;
     private ArrayList<Product> mProductArrayList;
     private ArrayList<Product> mProductArrayListFull;
-    private OnItemClickListener mClickListener;
+/*   private OnItemClickListener mClickListener;
 
 
     public interface OnItemClickListener{
@@ -29,7 +31,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
 
     public void setOnItemClickListener(OnItemClickListener listener){
         this.mClickListener = listener;
-    }
+    }*/
     //public Adapter(){}
 
     public Adapter(Context context, ArrayList<Product> productArrayList){
@@ -47,7 +49,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Product currentProduct = mProductArrayList.get(position);
+        final Product currentProduct = mProductArrayList.get(position);
 
         String name = currentProduct.getName();
         String description = currentProduct.getDescription();
@@ -57,6 +59,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
         holder.textViewProductDescription.setText(description);
         Picasso.get().load(imageUrl).into(holder.imageViewProductImage);
 
+  /*      holder.textViewProductName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentProduct.setSelected(!currentProduct.isSelected());;
+                Toast.makeText(mContext, "test", Toast.LENGTH_SHORT).show();
+            }
+        });*/
     }
 
     @Override
@@ -77,7 +86,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
             textViewProductName = itemView.findViewById(R.id.text_view_name);
             textViewProductDescription = itemView.findViewById(R.id.text_view_description);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+/*            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(mClickListener != null){
@@ -87,7 +96,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
                         }
                     }
                 }
-            });
+            });*/
         }
     }
 
