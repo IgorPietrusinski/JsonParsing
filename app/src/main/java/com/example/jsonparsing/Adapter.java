@@ -1,6 +1,7 @@
 package com.example.jsonparsing;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,16 +23,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
     private Context mContext;
     private ArrayList<Product> mProductArrayList;
     private ArrayList<Product> mProductArrayListFull;
-/*   private OnItemClickListener mClickListener;
+    private ArrayList<Product> mProductArrayListDeleted;
 
-
-    public interface OnItemClickListener{
-        void onItemClick(int position);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener){
-        this.mClickListener = listener;
-    }*/
     //public Adapter(){}
 
     public Adapter(Context context, ArrayList<Product> productArrayList){
@@ -59,13 +52,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
         holder.textViewProductDescription.setText(description);
         Picasso.get().load(imageUrl).into(holder.imageViewProductImage);
 
-  /*      holder.textViewProductName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                currentProduct.setSelected(!currentProduct.isSelected());;
-                Toast.makeText(mContext, "test", Toast.LENGTH_SHORT).show();
-            }
-        });*/
     }
 
     @Override
@@ -79,24 +65,23 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
         public TextView textViewProductDescription;
         public ImageView imageViewProductImage;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull final View itemView) {
             super(itemView);
 
             imageViewProductImage = itemView.findViewById(R.id.image_view_product);
             textViewProductName = itemView.findViewById(R.id.text_view_name);
             textViewProductDescription = itemView.findViewById(R.id.text_view_description);
 
-/*            itemView.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
-                public void onClick(View v) {
-                    if(mClickListener != null){
-                        int position = getAdapterPosition();
-                        if(position != RecyclerView.NO_POSITION){
-                            mClickListener.onItemClick(position);
-                        }
-                    }
+                public boolean onLongClick(View v) {
+                    mProductArrayListDeleted = new ArrayList<>();
+                    mProductArrayList.remove(getAdapterPosition());
+                    notifyDataSetChanged();
+                    Toast.makeText(mContext, "Item deleted ", Toast.LENGTH_SHORT).show();
+                    return false;
                 }
-            });*/
+            });
         }
     }
 

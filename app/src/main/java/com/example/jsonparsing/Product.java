@@ -7,7 +7,6 @@ public class Product {
     private String imageURL;
     private String name;
     private String description;
-   // private boolean isSelected = false;
 
     //public Product(){}
 
@@ -27,10 +26,4 @@ public class Product {
         return description;
     }
 
-/*    public void setSelected(boolean selected) {
-        isSelected = selected;
-    }
-    public boolean isSelected(){
-        return isSelected;
-    }*/
 }
