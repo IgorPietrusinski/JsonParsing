@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
         parseJSON();
 
+        Toast.makeText(this, "Long click remove item", Toast.LENGTH_SHORT).show();
+/******************************************* Deleting item with swipe left or right *******************************************************/
 /*        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
