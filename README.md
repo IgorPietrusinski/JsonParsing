@@ -6,7 +6,7 @@ What my app doing?
 - have APK ( below you have link for download )
 Full version of this app you can see here in next week ;)
 
-Here is a link for download APK: 
-https://drive.google.com/file/d/1mzAcdT-KSMBK2DAnO3A9opYxpPba38DR/view?usp=sharing
+Here is a link for download APK (Update: 03.08.2020): 
+https://drive.google.com/file/d/1mya6mgy0C7rwK5dTNgDJ5DcgzYtl8r-j/view?usp=sharing
 
 Enjoy and give me a response.
